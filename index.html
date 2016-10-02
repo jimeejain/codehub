@@ -2,11 +2,85 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Code Hub</title>
 </head>
-<body>
+<body ng-app="codehub" ng-controller="mainController">
+<!-- Loading a set of css and html to create a loader animation
+		Every other files would be after this, so that if files takes
+		long time to download, user gets some response by the loading animation
+ -->
+ 	<style>
+ 		#preloader-conainer{
+ 			position: fixed;
+ 			top: 0px;
+ 			left: 0px;
+ 			right: 0px;
+ 			bottom: 0px;
+ 			z-index: 999999;
+ 			background-color: #FFF;
+ 		}
+ 		#preloader{
+			position: absolute;
+			top: calc(50% - 125px);
+			left: calc(50% - 125px);
+			width: 250px;
+			height: 250px;
+			border-radius: 50%;
+			border: 15px solid #2196F3;
+			border-bottom-color: orange;
+			-webkit-animation: spinnerRotate 0.75s linear 0s infinite;
+			-moz-animation: spinnerRotate 0.75s linear 0s infinite;
+			-ms-animation: spinnerRotate 0.75s linear 0s infinite;
+			animation: spinnerRotate 0.75s linear 0s infinite;
+ 		}
+		@-webkit-keyframes spinnerRotate
+		{
+		    from{-webkit-transform:rotate(0deg);}
+		    to{-webkit-transform:rotate(360deg);}
+		}
+		@-moz-keyframes spinnerRotate
+		{
+		    from{-moz-transform:rotate(0deg);}
+		    to{-moz-transform:rotate(360deg);}
+		}
+		@-ms-keyframes spinnerRotate
+		{
+		    from{-ms-transform:rotate(0deg);}
+		    to{-ms-transform:rotate(360deg);}
+		}
+ 	</style>
+ 	<div id="preloader-conainer" ng-hide="ifLoaded">
+ 		<div id="preloader"></div>
+ 	</div>
+ 	
+	<!-- CSS Library for highlight js -->
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/default.min.css">
+	<!-- CSS Libarary for application -->
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+	<!-- Self Written CSS for application -->
+	<link rel="stylesheet" href="./css/app.css">
+
+	<ul class="w3-navbar w3-teal siteNavBar">
+		<li><a href="./#/"><strong>< Code Cafe /></strong></a></li>
+		<li class="w3-right"><a href="http://jimee.in" target="_blank">Jimee.in</a></li>
+		<li class="w3-right"><a href="./#/submission">Submissions</a></li>
+		
+	</ul>
+	<div ng-view class="viewContainer"></div>
+	<!-- <div hljs hljs-source="snippet"></div> -->
+	<!-- Libraries used for the project : AngularJS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-route.min.js"></script>
+	<!-- Highlighjs for highlighiting -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+	<script src="http://pc035860.github.io/angular-highlightjs/angular-highlightjs.min.js"></script>
+	<!-- JS Files for app -->
+	<script src="./js/app.js"></script>
+
 	
 </body>
 </html>

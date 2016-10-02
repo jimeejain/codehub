@@ -1,1 +1,176 @@
-app.css
+*{
+	padding: 0;
+	border: 0;
+	margin: 0;
+}
+.siteNavBar{
+	position: fixed;
+	width: 100%;
+	z-index: 1;
+	top: 0;
+}
+.viewContainer{
+	margin-top: 38px;
+}
+.compilerImg{
+	width: 25px;
+	height: 25px;
+}
+
+/* Submission Page */
+.sidenavToggler{
+	display: block;
+}
+.submission-sidenav{
+	width: 100%;
+	height: calc(100vh - 40px);
+	padding-bottom: 10px;
+	position: relative;
+	left: -100%;
+	transition: all linear 0.3s;
+}
+.submission-sidenav.active{
+	left: 0;
+	transition: all linear 0.3s;
+}
+
+.submission-cont{
+	transition: all linear 0.3s;
+}
+.bar{
+	cursor: pointer;
+	display: inline-block;
+	width: 40px;
+	color: red;
+}
+.filters{
+	color: #2196f3;
+}
+.codeSnippet{
+	height: 200px;
+	overflow: hidden;
+	transition: all linear 0.3s;
+}
+.codeSnippet.expanded{
+	height: auto;
+	transition: all linear 0.3s;
+}
+.snippetContainer{
+	position: relative;
+}
+
+.w3-input{
+	outline: none;
+	width: 100%;
+	margin: auto;
+}
+.codeBtn{
+	position: absolute;
+	right: 16px;
+	top: 0.01em;
+}
+.expand{
+	cursor: pointer;
+}
+.statsColor{
+	color: #2196f3;
+}
+/* home css */
+.homeContainer{
+	background-color: #48485e;
+	height: auto;
+}
+.exploreBtn{
+	margin-top: 45px;
+	border-radius: 20px;
+	display: inline-block;
+
+}
+.exploreBtn a{
+	text-decoration: none;
+}
+.w3-tangerine {
+    font-family: "Tangerine", serif;
+    color: #37ec68;
+    font-weight: bold;
+    text-shadow: 1px 1px #555;
+}
+.subHeading{
+	color: #2ee4e4;
+}
+.exampleContainer{
+	background-color: #cccccc;
+	padding: 40px;
+	border-radius: 10px;
+	width: 70%;
+	margin: auto;
+	margin-top: 30px;
+	height: 506px;
+}
+.exampleCode{
+	background-color: #ffffff;
+	border-left: 5px solid #4caf50;
+	width: 90%;
+	margin: auto;
+
+}
+@media only screen and (min-width: 600px) {
+	.submission-sidenav{
+		width: 25%;
+		left: 0px;
+	}
+	.submission-sidenav + .submission-cont{
+		margin-left: 25%;
+	}
+	.submission-sidenav + .submission-cont .sidenavToggler{
+		display: none;
+	}
+	.submission-sidenav.active{
+		left: -25%;
+	}
+
+	.submission-sidenav.active + .submission-cont{
+		margin-left: 0%;
+	}
+	.submission-sidenav.active + .submission-cont .sidenavToggler{
+		display: inline-block;
+	}
+
+
+}
+
+
+
+/* Home page animation effect */
+	.home-anim {
+		margin:auto;margin-top: 50px;
+		position: relative; height: 300px; width: 300px; 
+		border-radius: 10px; 
+		-webkit-perspective: 500; cursor: arrow;
+		}
+	.home-anim-wrap {
+		width: 292px; height: 292px; margin: 4px; 
+		border-radius: 10px; background-color: rgba(239,239,239,0.7); 
+		-webkit-animation: spin 10s infinite linear;
+		-webkit-transform-style: preserve-3d;
+		}
+
+	@-webkit-keyframes spin {
+		from { -webkit-transform: rotateY(0); }
+		to   { -webkit-transform: rotateY(360deg); }
+		}
+	.home-anim-wrap > div {
+		position: absolute; top: 40px; left: 40px; 
+		width: 200px; height: 200px; padding: 10px;
+		font: 12px monospace; text-shadow: 1px 1px 0 #fff;
+		-webkit-box-sizing: border-box;
+		}
+	.home-anim-wrap > :first-child {
+		background-color: rgba(51,204,153,0.5);
+		-webkit-transform: translateZ(-100px) rotateY(45deg);
+		}
+	.home-anim-wrap > :last-child {
+		background-color: rgba(255,255,102,0.5);
+		-webkit-transform: translateZ(50px) rotateX(20deg);
+		-webkit-transform-origin: 50% top;
+		}
