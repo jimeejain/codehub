@@ -1,0 +1,108 @@
+	<div class="w3-sidenav w3-white submission-sidenav" ng-class="{'active':isSideNavActive}">
+
+		<div class="w3-card-4">
+			<header class="w3-blue">
+				<button ng-click="isSideNavActive = !isSideNavActive;"><i class="fa fa-times bar"></i></button>
+				Filter
+			</header>
+			<ul class="w3-ul filters">
+				<li ng-repeat="(key, statusTitle) in stausTitles">
+					<label >
+						<input type="checkbox" name="forFilter" ng-model="selectedStatus[key]" />
+						<span ng-bind="statusTitle"></span>
+					</label>
+				</li>
+			</ul>
+		</div>
+		<div class="w3-card-4">
+			<header class="w3-container w3-blue">
+				Statistics
+			</header>
+			<div class="w3-margin">
+				<h4>Top 5 languages</h4>
+				<ul class="w3-ul">
+					<li ng-repeat="lang in topLanguages" class="statsColor">
+						<strong ng-bind="lang.name"></strong>
+						: <span ng-bind="lang.count"></span>
+					</li>
+					<li ng-hide="topLanguages.length" class="w3-orange">Please wait..fetching</li>
+				</ul>
+				<h4>Top 2 submissions</h4>
+				<ul class="w3-ul">
+					<li ng-repeat="submission in topSubmission" class="statsColor">
+						<strong ng-bind="submission.name"></strong>
+						: <span ng-bind="submission.count"></span>
+					</li>
+					<li ng-hide="topLanguages.length" class="w3-orange">Please wait..fetching</li>
+				</ul>
+				<h4>Number of Submissions per level</h4>
+				<ul class="w3-ul">
+					<li class="statsColor"><strong>Easy</strong>
+						: <span ng-show="submissionPerLevel.Easy" ng-bind="submissionPerLevel.Easy"></span>
+						<span ng-hide="submissionPerLevel.Easy" class="w3-orange">Wait ..</span>
+					</li>
+					<li class="statsColor"><strong>Medium</strong>
+						: <span ng-show="submissionPerLevel.Medium" ng-bind="submissionPerLevel.Medium"></span>
+						<span ng-hide="submissionPerLevel.Medium" class="w3-orange">Wait ..</span>
+					</li>
+					<li class="statsColor"><strong>Hard</strong>
+						: <span ng-show="submissionPerLevel.Hard" ng-bind="submissionPerLevel.Hard"></span>
+						<span ng-hide="submissionPerLevel.Hard" class="w3-orange">Wait ..</span>
+					</li>
+				</ul>
+				<h4>
+					Total Submissions : 
+					<span ng-show="totalSubmission" ng-bind="totalSubmission"></span>
+					<span ng-hide="totalSubmission" class="w3-orange">Wait..</span>
+				</h4>
+			</div>
+		</div>
+
+	</div>
+	<div class="submission-cont">
+		<button class="sidenavToggler" ng-click="isSideNavActive = !isSideNavActive;">
+			<i class="fa fa-bars bar"></i>
+		</button>
+		<div class="w3-row">
+			<div class="w3-col s12 m6">
+				<input type="text" class="w3-input" ng-model="searchQuery" placeholder="🔍 search title,level,language">
+			</div>
+			<div class="w3-col s12 m6">
+				<button class="w3-btn w3-grey" ng-click="currentPage=1;" ng-disabled="currentPage==1"><< (1)</button>
+				<button class="w3-btn w3-grey" ng-click="currentPage=currentPage-1;" ng-disabled="currentPage==1"><</button>
+				<button class="w3-btn w3-grey" ng-bind="currentPage"></button>
+				<button class="w3-btn w3-grey" ng-click="currentPage=currentPage+1;" ng-disabled="currentPage==maxPage">></button>
+				<button class="w3-btn w3-grey" ng-click="currentPage=maxPage;" ng-disabled="currentPage==maxPage">>> ({{maxPage}})</button>
+			</div>
+		</div>
+		
+
+		<div class="w3-card-4 w3-margin" ng-repeat="code in allRecords | statusFilter:selectedStatus | searchFilter:searchQuery | pagination:pgSize:currentPage">
+			<header class="w3-container w3-blue">
+				<h3>
+					<img class="compilerImg" ng-src="{{imageData[code.language]}}">
+					<span ng-bind="code.title"></span>
+				</h3>
+			</header>
+			<div class="w3-container snippetContainer">
+				<p class="codeSnippet" ng-class="{'expanded':code.isExpanded}" hljs hljs-source="code.source_code"></p>
+				<div class="codeBtn">
+					<span class="w3-tag" ng-class="statusClass[code.statusCode]" ng-bind="code.statusCode" title="compiler status"></span>
+					<span class="w3-tag w3-teal" ng-bind="code.language" title="Programming language used"></span>
+					<span class="w3-tag w3-green" title="User rating">
+						<i class="fa fa-star" ng-repeat="i in code.metadata.rating|rangeFil"></i>
+					</span>
+					<button title="click to expand code snippet" ng-click="code.isExpanded=!code.isExpanded"><i class="fa fa-expand expand" aria-hidden="true"></i></button>
+				</div>
+			</div>
+			<footer class="w3-container w3-blue">
+				<h5>
+					<span title="user attempted">
+						<i class="fa fa-users" aria-hidden="true"></i>
+						<span ng-bind="code.metadata.users_attempted"></span>
+					</span>
+					<span class="w3-right" ng-bind="code.metadata.level" title="Problem Level"></span>
+				</h5>
+			</footer>
+		</div>
+	</div>
